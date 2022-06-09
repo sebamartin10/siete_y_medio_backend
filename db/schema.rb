@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_201254) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_144223) do
   create_table "cards", force: :cascade do |t|
     t.string "symbol"
     t.integer "number"
@@ -24,6 +24,37 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_201254) do
     t.integer "maxAmountOfPlayers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "player_bets", force: :cascade do |t|
+    t.integer "chips100_amount"
+    t.integer "chips250_amount"
+    t.integer "chips1k_amount"
+    t.integer "chips2k_amount"
+    t.integer "chips5k_amount"
+    t.integer "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "player_cards", force: :cascade do |t|
+    t.boolean "is_card_visible"
+    t.integer "player_hand_id", null: false
+    t.integer "card_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_player_cards_on_card_id"
+    t.index ["player_hand_id"], name: "index_player_cards_on_player_hand_id"
+  end
+
+  create_table "player_hands", force: :cascade do |t|
+    t.integer "total_points"
+    t.integer "player_id", null: false
+    t.integer "player_bet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_bet_id"], name: "index_player_hands_on_player_bet_id"
+    t.index ["player_id"], name: "index_player_hands_on_player_id"
   end
 
   create_table "player_sessions", force: :cascade do |t|
@@ -41,12 +72,43 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_201254) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.string "bank"
+    t.boolean "is_current_round"
+    t.string "previous_turn"
+    t.string "current_turn"
+    t.string "next_turn"
+    t.integer "session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_rounds_on_session_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "maxAmountOfPlayers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "treasures", force: :cascade do |t|
+    t.integer "chips100_amount"
+    t.integer "chips250_amount"
+    t.integer "chips500_amount"
+    t.integer "chips1k_amount"
+    t.integer "chips5k_amount"
+    t.integer "total"
+    t.integer "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_treasures_on_player_id"
+  end
+
+  add_foreign_key "player_cards", "cards"
+  add_foreign_key "player_cards", "player_hands"
+  add_foreign_key "player_hands", "player_bets"
+  add_foreign_key "player_hands", "players"
   add_foreign_key "player_sessions", "players"
   add_foreign_key "player_sessions", "sessions"
+  add_foreign_key "rounds", "sessions"
+  add_foreign_key "treasures", "players"
 end

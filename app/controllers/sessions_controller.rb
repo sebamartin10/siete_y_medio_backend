@@ -6,7 +6,12 @@ class SessionsController < ApplicationController
     end
     def show
         @session = Session.find(params[:id])
-        render status:200, json:{players_in_session: @session.players}
+        render status:200, json:{players_in_session: @session.players,rounds: @session.rounds}
+    end
+    def getcurrentround
+        @session = Session.find(params[:id])
+        @round = @session.where(is_current_round: true)
+        render status:200, json:{current_round: @round}
     end
     def create
         @session = Session.new(session_params)

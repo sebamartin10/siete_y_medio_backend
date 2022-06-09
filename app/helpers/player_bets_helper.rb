@@ -1,0 +1,2 @@
+module PlayerBetsHelper
+end

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  100_chips_amount: 1
+  250_chips_amount: 1
+  1k_chips_amount: 1
+  2k_chips_amount: 1
+  5k_chips_amount: 1
+  total: 1
+
+two:
+  100_chips_amount: 1
+  250_chips_amount: 1
+  1k_chips_amount: 1
+  2k_chips_amount: 1
+  5k_chips_amount: 1
+  total: 1

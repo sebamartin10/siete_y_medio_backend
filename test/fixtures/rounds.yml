@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bank: MyString
+  is_current_round: false
+  previous_turn: MyString
+  current_turn: MyString
+  next_turn: MyString
+  session: one
+
+two:
+  bank: MyString
+  is_current_round: false
+  previous_turn: MyString
+  current_turn: MyString
+  next_turn: MyString
+  session: two

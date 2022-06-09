@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chips100_amount: 1
+  chips250_amount: 1
+  chips1k_amount: 1
+  chips2k_amount: 1
+  chips5k_amount: 1
+  total: 1
+  player: one
+
+two:
+  chips100_amount: 1
+  chips250_amount: 1
+  chips1k_amount: 1
+  chips2k_amount: 1
+  chips5k_amount: 1
+  total: 1
+  player: two
