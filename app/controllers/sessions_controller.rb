@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
     end
     def show
         @session = Session.find(params[:id])
-        render status:200, json:{players_in_session: @session.players,rounds: @session.rounds}
+        
+        render status:200, json:{session: @session,players: @session.players,players_session:@session.player_sessions,rounds: @session.rounds}
     end
     def getcurrentround
         @session = Session.find(params[:id])

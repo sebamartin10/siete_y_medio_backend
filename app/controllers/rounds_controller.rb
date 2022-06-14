@@ -8,13 +8,21 @@ class RoundsController < ApplicationController
             render status:500, json:{message:@round.error.details}
         end
     end
+    def update
+        @round = Round.find(params[:id])
+        if @round.update(round_params)
+            render status:200,json:{round:@round}
+        else
+            render status:400,json:{message:@round.errors.details}
+        end
+    end
     def index
         @rounds = Round.all
         render json:@rounds
     end
     def show
-        @round = Round.where(session_id: params[:session_id])
-        render json:@round
+        @round = Round.find(params[:id])
+        render status:200,json:{round:@round,player_bets:@round.player_bets,player_hands:@round.player_hands}
     end
     private 
         def round_params

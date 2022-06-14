@@ -1,3 +1,3 @@
 class Player < ApplicationRecord
-    has_one :treasure, dependent: :destroy
+    has_one :treasure
 end

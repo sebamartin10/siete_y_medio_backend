@@ -11,8 +11,12 @@ class PlayerSessionsController < ApplicationController
         end
         
     end
+    def show
+        @player_session = PlayerSession.find(params[:id])
+        render json:{position:@player_session.position_in_board}
+    end
     private 
         def player_session_params
-            params.require(:player_session).permit(:session_id,:player_id)
+            params.require(:player_session).permit(:session_id,:player_id,:position_in_board)
         end
 end

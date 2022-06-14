@@ -8,7 +8,19 @@ class TreasuresController < ApplicationController
             render status:500, json:{message:@treasure.errors.details}
         end
     end
+    def show
+        @treasure = Treasure.where(player_id: params[:id]).first
+        render status:200,json:{treasure:@treasure}
+    end
 
+    def update
+        @treasure = Treasure.find(params[:id])
+        if @treasure.update(treasure_params)
+            render status:200,json:{treasure:@treasure}
+        else
+            render status:400,json:{message:@treasure.errors.details}
+        end
+    end
     private 
         def treasure_params
             params.require(:treasure).permit(:chips100_amount,:chips250_amount,:chips500_amount,:chips1k_amount,:chips5k_amount,:total,:player_id)

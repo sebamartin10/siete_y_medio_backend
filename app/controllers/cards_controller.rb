@@ -19,6 +19,10 @@ class CardsController < ApplicationController
         end
        
     end
+    def show
+        @card = Card.find(params[:id])
+        render status:200,json:{card:@card}
+    end
 
     def destroy
         if !Card.exists?(params[:id])
