@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_14_135607) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_19_185309) do
   create_table "cards", force: :cascade do |t|
     t.string "symbol"
     t.integer "number"
-    t.integer "points"
+    t.float "points"
     t.string "denomination"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,13 +50,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_135607) do
   end
 
   create_table "player_hands", force: :cascade do |t|
-    t.integer "total_points"
+    t.float "total_points"
     t.integer "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "round_id", null: false
+    t.integer "round_id"
     t.index ["player_id"], name: "index_player_hands_on_player_id"
-    t.index ["round_id"], name: "index_player_hands_on_round_id"
   end
 
   create_table "player_sessions", force: :cascade do |t|
@@ -109,7 +108,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_135607) do
   add_foreign_key "player_cards", "cards"
   add_foreign_key "player_cards", "player_hands"
   add_foreign_key "player_hands", "players"
-  add_foreign_key "player_hands", "rounds"
   add_foreign_key "player_sessions", "players"
   add_foreign_key "player_sessions", "sessions"
   add_foreign_key "rounds", "sessions"

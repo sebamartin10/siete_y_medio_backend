@@ -9,7 +9,7 @@ class TreasuresController < ApplicationController
         end
     end
     def show
-        @treasure = Treasure.where(player_id: params[:id]).first
+        @treasure = Treasure.find(params[:id])
         render status:200,json:{treasure:@treasure}
     end
 
